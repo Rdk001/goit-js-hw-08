@@ -26,11 +26,12 @@ refs.form.addEventListener('submit', onButtonSubmit);
 function onFeedbackFormState(evt) {
   formData[evt.target.name] = evt.target.value;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
-  const localSorageObj = localStorage.getItem(STORAGE_KEY);
-  const formDataParse = JSON.parse(localSorageObj);
-  if (localSorageObj) {
-    evt.target.value = formDataParse[evt.target.name];
-  }
+}
+const formDataParse = JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+if (formDataParse) {
+  refs.email.value = formDataParse.email || '';
+  refs.textArea.value = formDataParse.message || '';
 }
 
 function onButtonSubmit(evt) {
@@ -40,8 +41,3 @@ function onButtonSubmit(evt) {
   localStorage.removeItem(STORAGE_KEY);
   evt.target.reset();
 }
-// const formDataParse = JSON.parse(localStorage.getItem(STORAGE_KEY));
-// if (localStorage.getItem(STORAGE_KEY)) {
-//   refs.email.value = formDataParse.email;
-//   refs.textArea.value = formDataParse.message;
-// }
